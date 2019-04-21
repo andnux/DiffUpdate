@@ -72,8 +72,30 @@ Java_top_andnux_diffupdate_Bspatch_bspatch(JNIEnv *env, jclass type, jstring old
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 ```
-2. 编写下载代码
-
-3. 编译结果<br><br>
-![图片](images/img.png)
-#### 测试
+2. 编写下载和安装代码
+```
+public static void installPatch(final Activity activity, final File patchFile) {
+        final String path = activity.getPackageResourcePath();
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                File directory = Environment.getExternalStoragePublicDirectory(
+                        Environment.DIRECTORY_DOWNLOADS);
+                final File file = new File(directory, System.currentTimeMillis() + ".apk");
+                Bspatch.bspatch(path, file.getAbsolutePath(), patchFile.getAbsolutePath());
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        install(activity, file);
+                }
+            });
+        }
+    }.start();
+}
+```
+3. 运行结果<br><br>
+![](images/v1.png)![](images/install.png)![](images/v2.png)
+#### 结束语
+关于APP端的增量更新就到此结束，如有疑问请到github查看源码。<br>
+附GitHub [https://github.com/andnux/DiffUpdate]
