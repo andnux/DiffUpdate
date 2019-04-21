@@ -94,8 +94,12 @@ public static void installPatch(final Activity activity, final File patchFile) {
     }.start();
 }
 ```
-3. 运行结果<br><br>
-![](images/v1.png)![](images/install.png)![](images/v2.png)
+3. 运行结果<br>
+
+<img src="images/v1.png" width="250" align=center />
+<img src="images/install.png" width="250" align=center />
+<img src="images/v2.png" width="250" align=center />
+
 #### 结束语
 关于APP端的增量更新就到此结束，如有疑问请到github查看源码。<br>
 附GitHub [https://github.com/andnux/DiffUpdate]
